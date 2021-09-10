@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.GridLayout;
@@ -10,7 +11,6 @@ public class gameStop {
     // hashmap to store the stores by integer ID
     private static HashMap<Integer, Store> stores = new HashMap<Integer, Store>();
     private JFrame mainFrame = new JFrame();
-
     /**
      * execution args, not used
      * 
@@ -55,12 +55,6 @@ public class gameStop {
                 removeStore();
             }
         });
-        editStore.addActionListener((ActionListener)new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                panel.removeAll();
-                editStore();
-            }
-        });
         
         exit.addActionListener((ActionListener)new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -70,7 +64,6 @@ public class gameStop {
 
         //add buttons to the frame
         panel.add(allStores);
-        panel.add(addStore);
         panel.add(removeStore);
         panel.add(editStore);
         panel.add(exit);
@@ -94,9 +87,21 @@ public class gameStop {
                 displayFirstOptions();
             }
         });
-        mainFrame.setVisible(false);
+
+        //create jtextarea that displays all of the stores in the stores HashMap
+        JTextArea textArea = new JTextArea();
+        var fullString = "";
+        for (Store store : stores.values()) {
+            fullString += store.toString() + "\n";
+        }
+        textArea.setEditable(false);
+        textArea.setText(fullString);
+        panel.add(textArea);
         panel.add(back);
+        mainFrame.setVisible(false);
         mainFrame.add(panel);
+        mainFrame.setSize(500, 500);
+        mainFrame.setLayout(new GridLayout(5, 6));
         mainFrame.setVisible(true);
     }
 
@@ -117,22 +122,6 @@ public class gameStop {
     }
 
     public void removeStore() {
-        JPanel panel = new JPanel();
-        JButton back = new JButton("Back");
-        back.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mainFrame.removeAll();
-                displayFirstOptions();
-            }
-        });
-        mainFrame.setVisible(false);
-        panel.removeAll();
-        panel.add(back);
-        mainFrame.add(panel);
-        mainFrame.setVisible(true);
-    }
-
-    public void editStore() {
         JPanel panel = new JPanel();
         JButton back = new JButton("Back");
         back.addActionListener(new ActionListener() {
