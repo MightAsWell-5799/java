@@ -7,6 +7,7 @@ public class Store{
      * @param sales the double value of sales over the past month
      * @param alias
      */
+
     private int ID;
     private double sales;
 
@@ -24,7 +25,7 @@ public class Store{
     /**
      * get the sales double of the store
      * 
-     * @return
+     * @return the sales double of the store
      */
     public double getSales() {
         return sales;
@@ -38,7 +39,10 @@ public class Store{
     public void setSales(double sales) {
         this.sales = sales;
     }
-
+    /**
+     * set the sales of the store with an int
+     * @param sales
+     */
     public void setSales(int sales) {
         this.sales = (double)sales/100;
     }
@@ -46,7 +50,7 @@ public class Store{
     /**
      * the integer ID of the store
      * 
-     * @return
+     * @return the integer ID of the store
      */
     public int getID() {
         return ID;
@@ -56,13 +60,18 @@ public class Store{
     // " + sales
     /**
      * 
-     * @return
+     * @return formatted string representation of the store
      */
     @Override
     public String toString() {
         return String.format("Store " + ID + " sold $%,.2f.", getSales());
     }
 
+
+    /**
+     * 
+     * @return csv formatted string representation of the store
+     */
     public String toCSV() {
         return getID() + "," + (int)(getSales()*100);
     }
